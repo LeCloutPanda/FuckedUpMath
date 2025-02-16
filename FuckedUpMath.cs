@@ -30,7 +30,7 @@ public class FuckedUpMath : ResoniteMod
    
     [AutoRegisterConfigKey] private static ModConfigurationKey<object> SPACER = new ModConfigurationKey<object>("spacer", " ", () => null);
     [AutoRegisterConfigKey] private static ModConfigurationKey<bool> RANDOMIZE = new ModConfigurationKey<bool>("randomize", "Randomize", () => false);
-    [AutoRegisterConfigKey] private static ModConfigurationKey<bool> ALLOW_MULTIPLAYER = new ModConfigurationKey<bool>("allowMultiplayer", "Bypasses LAN access level which will let others join", () => false);
+    //[AutoRegisterConfigKey] private static ModConfigurationKey<bool> ALLOW_MULTIPLAYER = new ModConfigurationKey<bool>("allowMultiplayer", "Bypasses LAN access level which will let others join", () => false);
     
     private static readonly Random random = new Random();
 
@@ -103,9 +103,10 @@ public class FuckedUpMath : ResoniteMod
 
     private static bool ShouldRun() {
         if (Engine.Current.WorldManager.FocusedWorld == null) return false;
-        if (!Engine.Current.WorldManager.FocusedWorld.UnsafeMode) return false;
         if (Engine.Current.WorldManager.FocusedWorld.IsAuthority) return false;
-        if (config.GetValue(ALLOW_MULTIPLAYER) && Engine.Current.WorldManager.FocusedWorld.AccessLevel != SessionAccessLevel.LAN) return false;
+        if (!Engine.Current.WorldManager.FocusedWorld.UnsafeMode) return false;
+        if (Engine.Current.WorldManager.FocusedWorld.AccessLevel != SessionAccessLevel.LAN) return false;
+        //if (config.GetValue(ALLOW_MULTIPLAYER) && Engine.Current.WorldManager.FocusedWorld.AccessLevel != SessionAccessLevel.LAN) return false;
         if (!config.GetValue(ENABLED)) return false;
 
         return true;
