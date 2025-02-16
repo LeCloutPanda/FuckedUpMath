@@ -103,10 +103,10 @@ public class FuckedUpMath : ResoniteMod
 
     private static bool ShouldRun() {
         if (Engine.Current.WorldManager.FocusedWorld == null) return false;
-        if (Engine.Current.WorldManager.FocusedWorld.IsAuthority) return false;
+        if (!Engine.Current.WorldManager.FocusedWorld.IsAuthority) return false;
         if (!Engine.Current.WorldManager.FocusedWorld.UnsafeMode) return false;
         if (Engine.Current.WorldManager.FocusedWorld.AccessLevel != SessionAccessLevel.LAN) return false;
-        //if (config.GetValue(ALLOW_MULTIPLAYER) && Engine.Current.WorldManager.FocusedWorld.AccessLevel != SessionAccessLevel.LAN) return false;
+        //if (config.GetValue(ALLOW_MULTIPLAYR) && Engine.Current.WorldManager.FocusedWorld.AccessLevel != SessionAccessLevel.LAN) return false;
         if (!config.GetValue(ENABLED)) return false;
 
         return true;
